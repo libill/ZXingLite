@@ -76,7 +76,7 @@ class CustomActivity : AppCompatActivity(), OnCaptureCallback {
      * @param result 扫码结果
      * @return
      */
-    override fun onResultCallback(result: String): Boolean {
+    override fun onResultCallback(result: String?): Boolean {
         if (isContinuousScan) {
             Toast.makeText(this, result, Toast.LENGTH_SHORT).show()
         }

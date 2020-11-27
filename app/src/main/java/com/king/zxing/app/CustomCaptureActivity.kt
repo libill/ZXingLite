@@ -30,9 +30,9 @@ import com.king.zxing.camera.FrontLightMode
  */
 class CustomCaptureActivity : CaptureActivity() {
     private var isContinuousScan = false
-    override fun getLayoutId(): Int {
-        return R.layout.custom_capture_activity
-    }
+
+    override val layoutId: Int
+        get() = R.layout.custom_capture_activity
 
     public override fun onCreate(icicle: Bundle?) {
         super.onCreate(icicle)
@@ -42,18 +42,20 @@ class CustomCaptureActivity : CaptureActivity() {
         tvTitle.text = intent.getStringExtra(MainActivity.Companion.KEY_TITLE)
         isContinuousScan = intent.getBooleanExtra(MainActivity.Companion.KEY_IS_CONTINUOUS, false)
         //获取CaptureHelper，里面有扫码相关的配置设置
-        captureHelper.playBeep(false) //播放音效
-            .vibrate(true) //震动
-            .supportVerticalCode(true) //支持扫垂直条码，建议有此需求时才使用。
-            //                .decodeFormats(DecodeFormatManager.QR_CODE_FORMATS)//设置只识别二维码会提升速度
-            //                .framingRectRatio(0.9f)//设置识别区域比例，范围建议在0.625 ~ 1.0之间。非全屏识别时才有效
-            //                .framingRectVerticalOffset(0)//设置识别区域垂直方向偏移量，非全屏识别时才有效
-            //                .framingRectHorizontalOffset(0)//设置识别区域水平方向偏移量，非全屏识别时才有效
-            .frontLightMode(FrontLightMode.AUTO) //设置闪光灯模式
-            .tooDarkLux(45f) //设置光线太暗时，自动触发开启闪光灯的照度值
-            .brightEnoughLux(100f) //设置光线足够明亮时，自动触发关闭闪光灯的照度值
-            .continuousScan(isContinuousScan) //是否连扫
-            .supportLuminanceInvert(true) //是否支持识别反色码（黑白反色的码），增加识别率
+        captureHelper?.let { captureHelper ->
+            captureHelper.playBeep(false) //播放音效
+                .vibrate(true) //震动
+                .supportVerticalCode(true) //支持扫垂直条码，建议有此需求时才使用。
+                //                .decodeFormats(DecodeFormatManager.QR_CODE_FORMATS)//设置只识别二维码会提升速度
+                //                .framingRectRatio(0.9f)//设置识别区域比例，范围建议在0.625 ~ 1.0之间。非全屏识别时才有效
+                //                .framingRectVerticalOffset(0)//设置识别区域垂直方向偏移量，非全屏识别时才有效
+                //                .framingRectHorizontalOffset(0)//设置识别区域水平方向偏移量，非全屏识别时才有效
+                .frontLightMode(FrontLightMode.AUTO) //设置闪光灯模式
+                .tooDarkLux(45f) //设置光线太暗时，自动触发开启闪光灯的照度值
+                .brightEnoughLux(100f) //设置光线足够明亮时，自动触发关闭闪光灯的照度值
+                .continuousScan(isContinuousScan) //是否连扫
+                .supportLuminanceInvert(true) //是否支持识别反色码（黑白反色的码），增加识别率
+        }
     }
 
     /**
@@ -61,7 +63,7 @@ class CustomCaptureActivity : CaptureActivity() {
      * @param result 扫码结果
      * @return
      */
-    override fun onResultCallback(result: String): Boolean {
+    override fun onResultCallback(result: String?): Boolean {
         if (isContinuousScan) { //连续扫码时，直接弹出结果
             Toast.makeText(this, result, Toast.LENGTH_SHORT).show()
         }

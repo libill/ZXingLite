@@ -13,33 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.king.zxing;
+package com.king.zxing
 
-import android.app.Activity;
-import android.os.Bundle;
+import android.view.MotionEvent
 
 /**
- * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
+ * @author [Jenly](mailto:jenly1314@gmail.com)
  */
-public interface CaptureLifecycle {
-
+interface CaptureTouchEvent {
     /**
-     * {@link Activity#onCreate(Bundle)}
+     * [android.app.Activity.onTouchEvent]
      */
-    void onCreate();
-    /**
-     * {@link Activity#onResume()}
-     */
-    void onResume();
-
-    /**
-     * {@link Activity#onPause()}
-     */
-    void onPause();
-
-    /**
-     * {@link Activity#onDestroy()}
-     */
-    void onDestroy();
-
+    fun onTouchEvent(event: MotionEvent): Boolean
 }

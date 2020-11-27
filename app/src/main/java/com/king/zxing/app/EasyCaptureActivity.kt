@@ -26,9 +26,8 @@ import com.king.zxing.app.util.immersiveStatusBar
  * @author Jenly [Jenly](mailto:jenly1314@gmail.com)
  */
 class EasyCaptureActivity : CaptureActivity() {
-    override fun getLayoutId(): Int {
-        return R.layout.easy_capture_activity
-    }
+
+    override val layoutId: Int = R.layout.easy_capture_activity
 
     public override fun onCreate(icicle: Bundle?) {
         super.onCreate(icicle)
@@ -36,9 +35,11 @@ class EasyCaptureActivity : CaptureActivity() {
         immersiveStatusBar(this, toolbar, 0.2f)
         val tvTitle = findViewById<TextView>(R.id.tvTitle)
         tvTitle.text = intent.getStringExtra(MainActivity.Companion.KEY_TITLE)
-        captureHelper //                .decodeFormats(DecodeFormatManager.QR_CODE_FORMATS)//设置只识别二维码会提升速度
-            .playBeep(true)
-            .vibrate(true)
+        captureHelper?.let { captureHelper ->
+            captureHelper
+                .playBeep(true)
+                .vibrate(true)
+        }
     }
 
     fun onClick(v: View) {

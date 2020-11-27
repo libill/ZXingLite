@@ -1,5 +1,9 @@
+package com.king.zxing.camera.open
+
+import android.hardware.Camera
+
 /*
- * Copyright (C) 2019 Jenly Yu
+ * Copyright (C) 2015 ZXing authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,18 +16,13 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ */ /**
+ * Represents an open [Camera] and its metadata, like facing direction and orientation.
  */
-package com.king.zxing;
+// camera APIs
+class OpenCamera(private val index: Int, val camera: Camera, val facing: CameraFacing, val orientation: Int) {
 
-import android.view.MotionEvent;
-
-/**
- * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
- */
-public interface CaptureTouchEvent {
-
-    /**
-     * {@link android.app.Activity#onTouchEvent(MotionEvent)}
-     */
-    boolean onTouchEvent(MotionEvent event);
+    override fun toString(): String {
+        return "Camera #$index : $facing,$orientation"
+    }
 }

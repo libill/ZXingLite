@@ -13,36 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.king.zxing;
+package com.king.zxing
 
-import com.king.zxing.camera.CameraManager;
+import android.app.Activity
 
 /**
- * @author <a href="mailto:jenly1314@gmail.com">Jenly</a>
+ * @author [Jenly](mailto:jenly1314@gmail.com)
  */
-public interface CaptureManager {
+interface CaptureLifecycle {
+    /**
+     * [Activity.onCreate]
+     */
+    fun onCreate()
 
     /**
-     * Get {@link CameraManager}
-     * @return {@link CameraManager}
+     * [Activity.onResume]
      */
-    CameraManager getCameraManager();
+    fun onResume()
 
     /**
-     * Get {@link BeepManager}
-     * @return {@link BeepManager}
+     * [Activity.onPause]
      */
-    BeepManager getBeepManager();
+    fun onPause()
 
     /**
-     * Get {@link AmbientLightManager}
-     * @return {@link AmbientLightManager}
+     * [Activity.onDestroy]
      */
-    AmbientLightManager getAmbientLightManager();
-
-    /**
-     * Get {@link InactivityTimer}
-     * @return {@link InactivityTimer}
-     */
-    InactivityTimer getInactivityTimer();
+    fun onDestroy()
 }
